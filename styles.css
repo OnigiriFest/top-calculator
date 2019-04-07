@@ -1,0 +1,135 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+@font-face {
+	font-family: 'GothamPro';
+	src: url('Fonts/GothamPro.eot') format('eot'), 
+	     url('Fonts/GothamPro.otf')  format('opentype'),
+	     url('Fonts/GothamPro.woff') format('woff'), 
+	     url('Fonts/GothamPro.ttf')  format('truetype'),
+	     url('Fonts/GothamPro.svg#GothamPro') format('svg');
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    font-family: 'GothamPro';
+}
+
+/* -------- HEADER ---------*/
+
+.container {
+    max-height: 620px;
+    margin: auto 10px;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #1A1A1A;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+}
+
+header {
+    width: 100%;
+}
+
+header nav {
+    width: 100%;
+    display: flex;
+}
+
+header nav a {
+    text-align: center;
+    text-decoration: none;
+    color: #767676;
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    border-bottom: solid 1px #767676;
+}
+
+.active {
+    color: #F77653;
+    border-bottom: solid 3px #F77653;
+}
+
+/* -------- DISPLAY ---------*/
+
+#display {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-bottom: solid 1px #767676;
+}
+
+#before {
+    display: flex;
+    margin: 10px 0px;
+    justify-content: flex-end;
+    color: #767676;
+    letter-spacing: 2px;
+    font-size: 19;
+}
+
+#now {
+    display: flex;
+    margin-top: 45px;
+    justify-content: flex-end;
+    color: white;
+    letter-spacing: 2px;
+    font-size: 19;
+}
+
+#result {
+    display: flex;
+    margin-top: 3px;
+    justify-content: flex-end;
+    color: white;
+    letter-spacing: 2px;
+    font-size: 42px;
+}
+
+/* -------- KEYBOARD ---------*/
+
+#keyboard {
+    display: flex;
+    flex-direction: column;
+}
+
+#keyboard div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.btn {
+    font-size: 29px;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    background-color: #1A1A1A;
+    color: white;
+    border: solid 1px #767676;
+}
+
+.is-grey {
+    background-color: #303030; 
+    color: #9A9A9A;
+    border: none;
+}
+
+.is-orange {
+    background-color: #F77653;
+    color: white;
+    border: none;
+}
+
+.is-special-parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
