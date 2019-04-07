@@ -38,6 +38,16 @@ function catcher(e) {
         return;
     }
 
+    if(e.target.value == 'C') {
+        let displayResult = document.querySelector('#result');
+        let displayNow = document.querySelector('#now');
+
+        displayResult.textContent = '';
+        displayNow.textContent = '';
+
+        return;
+    }
+
     if(e.target.value == '=') {
         let displayResult = document.querySelector('#result');
         let displayNow = document.querySelector('#now');
