@@ -103,7 +103,7 @@ function displayWrite(string) {
     let lastChar = newResult[newResult.length - 1];
     const regex = /[-x+÷]$/g;
 
-    if(regex.test(string) && regex.test(displayNow.textContent)) {
+    if(displayResult.textContent === '' && regex.test(string) && regex.test(displayNow.textContent)) {
         return;
     } 
 
