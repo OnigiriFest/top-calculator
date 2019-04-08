@@ -1,3 +1,13 @@
+/* BODY SIZE */
+let body = document.body;
+    html = document.documentElement;
+
+let height = Math.max( body.scrollHeight, body.offsetHeight, 
+                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+
+body.style.height = height + 'px';
+
+
 function add(num1, num2) {
     return Math.round((num1 + num2) * 100) / 100;
 }
@@ -11,6 +21,9 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
+    if(num2 === 0) {
+        return 'ERROR';
+    }
     return Math.round((num1 / num2) * 100) / 100;
 }
 
@@ -103,13 +116,26 @@ function displayWrite(string) {
     let lastChar = newResult[newResult.length - 1];
     const regex = /[-x+÷]$/g;
 
+    if(/\./g.test(displayResult.textContent) && string === '.') {
+        return;
+    }
+
+    if(displayResult.textContent === 'ERROR') {
+        displayResult.textContent = '';
+        displayNow.textContent = '';
+
+        return;
+    }
+
     if(displayResult.textContent === '' && regex.test(string) && regex.test(displayNow.textContent)) {
         return;
     } 
 
+    /*
     if(newResult[newResult.length - 1] === '.' && newResult[newResult.length -2] === '.') {
         return;
     }
+    */
 
     if (displayResult.getAttribute('status') === 'result' && regex.test(newResult) === false) {
         displayBefore.textContent = displayNow.textContent + '=' + newResult.slice(0, newResult.length - 1);
@@ -161,7 +187,6 @@ function catcher(e) {
         case undefined:
 
             if(displayResult.textContent === '') {
-                console.log('entro');
                 let stringNow = displayNow.textContent;
                 stringNow = stringNow.slice(0, stringNow.length - 1);
                 displayNow.textContent = stringNow;
@@ -197,6 +222,10 @@ function catcher(e) {
                 return;
             }
 
+            if(displayResult.getAttribute('status') === 'result') {
+                return;
+            }
+
             displayNow.textContent = operation;
             displayResult.textContent = result;
 
@@ -211,6 +240,26 @@ function catcher(e) {
         displayWrite(e.target.value);
     }
 }
+
+document.addEventListener('keydown', (e) => {
+    let buttons = document.querySelectorAll('.btn');
+
+    buttons.forEach((value) => {
+        if(value.value === e.key) {
+            e.target.value = value.value;
+        } else if(e.key === '*' && value.value === 'x') {
+            e.target.value = value.value;
+        } else if(e.key === '/' && value.value === '÷') {
+            e.target.value = value.value;
+        } else if(e.key === 'Backspace' && value.value === 'del') {
+            e.target.value = value.value;
+        } else if(e.key === 'Enter' && value.value === '=') {
+            e.target.value = value.value;
+        }
+    });
+
+    catcher(e);
+});
 
 let buttons = Array.from(document.querySelectorAll('.btn'));
 buttons.forEach((value) => {
