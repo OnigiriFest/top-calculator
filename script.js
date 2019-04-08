@@ -107,7 +107,6 @@ function displayWrite(string) {
         return;
     } 
 
-    console.log(newResult[newResult.length - 1]);
     if(newResult[newResult.length - 1] === '.' && newResult[newResult.length -2] === '.') {
         return;
     }
@@ -155,11 +154,24 @@ function catcher(e) {
     let operation = displayNow.textContent + displayResult.textContent;
     let result = operate(operation);
     let string = displayResult.textContent;
+    const regex = /[-x+÷]$/g;
 
     switch(e.target.value) {
         case 'del':
+        case undefined:
+
+            if(displayResult.textContent === '') {
+                console.log('entro');
+                let stringNow = displayNow.textContent;
+                stringNow = stringNow.slice(0, stringNow.length - 1);
+                displayNow.textContent = stringNow;
+
+                return;
+            }
+
             string = string.slice(0, string.length - 1);
             displayResult.textContent = string;
+
             return;
         case '%':
             return;
@@ -181,15 +193,15 @@ function catcher(e) {
             displayNow.textContent = ''
             return;
         case '=':
+            if(regex.test(displayNow.textContent) && displayResult.textContent === '') {
+                return;
+            }
+
             displayNow.textContent = operation;
             displayResult.textContent = result;
 
             displayResult.setAttribute('status', 'result');
 
-            return;
-        case undefined:
-            string = string.slice(0, string.length - 1);
-            displayResult.textContent = string;
             return;
     }
 
