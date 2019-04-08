@@ -89,6 +89,7 @@ header nav a {
 #result {
     display: flex;
     margin-top: 3px;
+    height: 100%;
     justify-content: flex-end;
     color: white;
     letter-spacing: 2px;
