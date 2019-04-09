@@ -24,7 +24,15 @@ function divide(num1, num2) {
     if(num2 === 0) {
         return 'ERROR';
     }
-    return Math.round((num1 / num2) * 100) / 100;
+    let result = num1 / num2;
+    let string = result.toString();
+    if(string.length > 15 && string[string.length - 1] === '5') {
+        result = (Math.round(result * 100) / 100) + '5';
+        result = Number(result);
+    } else {
+        result = Math.round(result * 100) / 100;
+    }
+    return result;
 }
 
 function operate(string) {
@@ -98,7 +106,7 @@ function searchOperators(string) {
     operators = operators.filter((value) => {
         if(value === '+') {
             return false;
-        } else if(value === '-' | value === '÷' | value === 'x') {
+        } else if(value === '-' || value === '÷' || value === 'x') {
             return true;
         } else {
             return false;
@@ -131,12 +139,6 @@ function displayWrite(string) {
         return;
     } 
 
-    /*
-    if(newResult[newResult.length - 1] === '.' && newResult[newResult.length -2] === '.') {
-        return;
-    }
-    */
-
     if (displayResult.getAttribute('status') === 'result' && regex.test(newResult) === false) {
         displayBefore.textContent = displayNow.textContent + '=' + newResult.slice(0, newResult.length - 1);
 
@@ -147,11 +149,11 @@ function displayWrite(string) {
         return
     }
 
-    if(lastChar === '+' | lastChar === '-' | lastChar === 'x' | lastChar === '÷') {
+    if(lastChar === '+' || lastChar === '-' || lastChar === 'x' || lastChar === '÷') {
         if(displayResult.textContent === '') {
             displayResult.textContent = string;
             return;
-        } else if(displayResult.textContent === '+' | displayResult.textContent === '-' | displayResult.textContent === '÷' | displayResult.textContent === 'x') {
+        } else if(displayResult.textContent === '+' || displayResult.textContent === '-' || displayResult.textContent === '÷' || displayResult.textContent === 'x') {
             return;
         }
 
@@ -183,6 +185,8 @@ function catcher(e) {
     const regex = /[-x+÷]$/g;
 
     switch(e.target.value) {
+        case 'letter':
+            return;
         case 'del':
         case undefined:
 
@@ -255,6 +259,8 @@ document.addEventListener('keydown', (e) => {
             e.target.value = value.value;
         } else if(e.key === 'Enter' && value.value === '=') {
             e.target.value = value.value;
+        } else {
+            return e.target.value = 'letter';
         }
     });
 
