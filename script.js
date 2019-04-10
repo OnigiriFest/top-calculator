@@ -238,7 +238,7 @@ function catcher(e) {
             return;
     }
 
-    if(string.length > 10) {
+    if(string.length > 10 && !/[÷+x-]/.test(e.target.value)) {
         return;
     } else {
         displayWrite(e.target.value);
