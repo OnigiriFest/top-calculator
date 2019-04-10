@@ -249,22 +249,30 @@ document.addEventListener('keydown', (e) => {
     let buttons = document.querySelectorAll('.btn');
 
     buttons.forEach((value) => {
-        if(value.value === e.key) {
+        if(value.value === '.' && e.key === '.') {
             e.target.value = value.value;
+            catcher(e);
+            return
+        } else if(value.value === e.key) {
+            e.target.value = value.value;
+            catcher(e);
         } else if(e.key === '*' && value.value === 'x') {
             e.target.value = value.value;
+            catcher(e);
         } else if(e.key === '/' && value.value === '÷') {
             e.target.value = value.value;
+            catcher(e);
         } else if(e.key === 'Backspace' && value.value === 'del') {
             e.target.value = value.value;
+            catcher(e);
         } else if(e.key === 'Enter' && value.value === '=') {
             e.target.value = value.value;
-        } else {
-            return e.target.value = 'letter';
+            catcher(e);
+        } else if(!/[0-9]/.test(e.key)) {
+            e.target.value = 'letter';
+            catcher(e);
         }
     });
-
-    catcher(e);
 });
 
 let buttons = Array.from(document.querySelectorAll('.btn'));
